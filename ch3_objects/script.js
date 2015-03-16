@@ -20,6 +20,15 @@ var flight = {
   }
 };
 
+stooge['middle-name'] = 'Lester';
+stooge.nickname = 'Curly';
+flight.equipment = {
+  model: 'Boeing 777'
+};
+
+flight.status = 'overdue';
+
+
 var x = stooge;
 x.nickname = 'Curly';
 var nick = stooge.nickname;
@@ -46,4 +55,24 @@ another_stooge['last-name'] = "Moses";
 another_stooge.nickname = 'Moe';
 
 stooge.profession = 'actor';
-console.log(another_stooge.profession);         // logs  prototype into new obj
+another_stooge.profession;
+
+var name;
+for (name in another_stooge) {                        // enumeration - filtering using a 'for' 'in' statement
+  if (typeof another_stooge[name] !== 'function') {   // if the typeof object another_stooge[name] isn't a function
+    document.writeln(name + ': ' + another_stooge[name]);   // write all name data that isn't function
+  }
+}
+
+var i;
+var properties = [
+  'first-name',
+  'middle-name',
+  'last-name',
+  'profession'
+];
+
+for (i = 0; i < properties.length; i += 1) {
+  document.writeln(properties[i] + ': ' +
+        another_stooge[properties[i]]);
+}
