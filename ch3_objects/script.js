@@ -57,14 +57,14 @@ another_stooge.nickname = 'Moe';
 stooge.profession = 'actor';
 another_stooge.profession;
 
-var name;
-for (name in another_stooge) {                        // enumeration - filtering using a 'for' 'in' statement
-  if (typeof another_stooge[name] !== 'function') {   // if the typeof object another_stooge[name] isn't a function
-    document.writeln(name + ': ' + another_stooge[name]);   // write all name data that isn't function
-  }
-}
+//var name;
+//for (name in another_stooge) {                        // enumeration - filtering using a 'for' 'in' statement
+  //if (typeof another_stooge[name] !== 'function') {   // if the typeof object another_stooge[name] isn't a function
+    //document.writeln(name + ': ' + another_stooge[name]);   // write all name data that isn't function
+  //}
+//}
 
-var i;
+var i;                                                // enumeration using a for statement
 var properties = [
   'first-name',
   'middle-name',
