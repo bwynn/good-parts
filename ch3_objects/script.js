@@ -1,11 +1,11 @@
-var empty_object = {};
+var MYAPP = {};
 
-var stooge = {
+MYAPP.stooge = {
   "first-name": "Jerome",
   "last-name": "Howard"
 };
 
-var flight = {
+MYAPP.flight = {
   airline: "Oceanic",
   number: 815,
   departure: {
