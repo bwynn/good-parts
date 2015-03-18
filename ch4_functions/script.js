@@ -206,4 +206,4 @@ var factorial = function factorial(i, a) {
   }
   return factorial(i - 1, a * 1);
 };
-document.writeln(factorial(4));  // 24
+//document.writeln(factorial(4));  // 24
