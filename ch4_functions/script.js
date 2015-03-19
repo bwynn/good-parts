@@ -276,3 +276,60 @@ var add_the_handlers = function (nodes) {
     nodes[i].onclick = helper(i);
   }
 };
+
+String.method('deentityify', function() {
+  // the entity table. it maps entity names to characters
+  var entity = {
+    quot: '"',
+    lt: '<',
+    gt: '>'
+  };
+
+  // return the deentityify method.
+  return function() {
+    // this is the deentityify method. it calls the string
+    // replace mthod, looking for substrings that start
+    // with '&' and end with ';'. If the characters in
+    // between are in the entity table, then replace the
+    // entity with the character from the table.
+    // it uses a refular expression
+
+    return this.replace(/&([^&;]+);/g,
+      function(a, b) {
+        var r = entity[b];
+        return typeof r === 'string' ? r : a;
+      }
+    );
+  };
+}());
+
+//document.writeln('&lt;&quot;&gt;'.deentityify()); // <">
+
+var serial_maker = function() {
+  // produce an object that produces unique strings. a
+  // unique string is made up of two parts: a prefix
+  // and a sequence nubmer. The object comes with methods
+  // for setting the prefix and sequence
+  // number, and a gensym method that produces unique strings
+
+  var prefix = '';
+  var seq = 0;
+  return {
+    set_prefix: function(p) {
+      prefix = String(p);
+    },
+    set_seq: function(s) {
+      seq = s;
+    },
+    gensym: function() {
+      var result = prefix + seq;
+      seq += 1;
+      return result;
+    }
+  };
+};
+
+var seqer = serial_maker();
+seqer.set_prefix('Q');
+seqer.set_seq(1000);
+var unique = seqer.gensym();    // unique is Q1000

@@ -30,15 +30,3 @@ var jsondata = (function() {                  // closure proof of concept to
   }
   };
 }());                     // () invokes object containing two methods
-
-// create a maker function called quo. it makes an
-// object with a get_status method and a private
-// status property
-
-var quo = function (status) {
-  return {
-    get_status: function() {
-      return status;
-    }
-  };
-};
