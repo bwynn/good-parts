@@ -333,3 +333,78 @@ var seqer = serial_maker();
 seqer.set_prefix('Q');
 seqer.set_seq(1000);
 var unique = seqer.gensym();    // unique is Q1000
+
+// Adding an example of currying
+//var add1 = add.curry(1);
+//document.writeln(add1(6));    //7
+
+// js does not have a curry method, but we can fix that as follows
+/*Function.method('curry', function() {
+  var args = arguments, that = this;
+  return function () {
+    return that.apply(null, args.concat(arguments));
+  };
+});       // something still isnt right*/
+
+Function.method('curry', function() {
+  var slice = Array.prototype.slice,
+  args = slice.apply(arguments),
+  that = this;
+  return function() {
+    return that.apply(null, args.concat(slice.apply(arguments)));
+  };
+});
+
+//now passing the following code will produce results as expected
+var add1 = add.curry(1);
+//document.writeln(add1(6));    //7
+
+
+
+
+
+// Example of memoization
+// memoization remembers the results of previous operations, eliminating redundant calls
+
+/*var fibonacci = function(n) {
+  return n < 2 ? n : fibonacci(n - 1) + fibonacci(n - 2);
+};
+
+for (var i = 0; i <= 10; i += 1) {
+  document.writeln('// ' + i + ': ' + fibonacci(i) + '<br>');
+} */
+
+// A lot of extra code there
+
+// calling it directly
+/*var fibonacci = (function() {
+  var memo = [0, 1];
+  var fib = function(n) {
+    var result = memo[n];
+    if (typeof result !== 'number') {
+      result = fib(n - 1) + fib(n - 2);
+    }
+    return result;
+  };
+  return fib;
+}());*/
+
+var memoizer = function(memo, formula) {
+  var recur = function(n) {
+    var result = memo[n];
+    if(typeof result !== 'number') {
+      result = formula(recur, n);
+      memo[n] = result;
+    }
+    return result;
+  };
+  return recur;
+};
+
+var fibonacci = memoizer([0, 1], function (recur, n) {
+  return recur(n - 1) + recur(n - 2);
+});
+
+var factorial = memoizer([1, 1], function(recur, n) {
+  return n * recur(n - 1);
+});
