@@ -44,4 +44,42 @@ Cat.prototype.get_name = function() {
 var myCat = new Cat('Henrietta');
 var says = myCat.says(); // meow
 var purr = myCat.purr(5); // r-r-r-r-r
-var name = myCat.get_name();
+var name = myCat.get_name(); // 'meow Henrietta meow'
+
+// using a 'method' method defining an inherits method
+
+/*Function.method('inherits', function(Parent) {
+  this.prototype = new Parent();
+  return this;
+});
+
+// now we can program a cascade style
+
+var Cat = function (name) {
+  this.name = name;
+  this.saying = 'meow';
+}.
+  inherits(Mammal).
+  method('purr', function(n) {
+    var i, s = '';
+    for (i = 0; i < n; i += 1) {
+      if (s) {
+        s += '-';
+      }
+      s += 'r';
+    }
+    return s;
+  }).
+  method('get_name', function() {
+    return this.says() + ' ' + this.name + ' ' + this.says();
+  });*/
+
+// object specifier
+
+/*var myObject = maker({
+  first: f,
+  last: l,
+  middle: m,
+  state: s,
+  city: c
+});*/
